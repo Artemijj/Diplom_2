@@ -20,7 +20,7 @@ public class GetUserOrdersTest {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
+        RestAssured.baseURI = new Url().bUrl;
     }
 
     @Test

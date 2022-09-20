@@ -12,10 +12,11 @@ public class CreateUserTest {
     String email = "testqaemail@gmail.com";
     String password = "testqapassword";
     String name = "testqaname";
+    String errorMessage = "Email, password and name are required fields";
     String aToken;
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
+        RestAssured.baseURI = new Url().bUrl;
     }
 
     @Test
@@ -46,7 +47,7 @@ public class CreateUserTest {
         String email = "";
         userActivities.create(email, password, name)
                 .assertThat()
-                .body("message", equalTo("Email, password and name are required fields"))
+                .body("message", equalTo(errorMessage))
                 .statusCode(403);
     }
 
@@ -57,7 +58,7 @@ public class CreateUserTest {
         String password = "";
         userActivities.create(email, password, name)
                 .assertThat()
-                .body("message", equalTo("Email, password and name are required fields"))
+                .body("message", equalTo(errorMessage))
                 .statusCode(403);
     }
 
@@ -68,7 +69,7 @@ public class CreateUserTest {
         String name = "";
         userActivities.create(email, password, name)
                 .assertThat()
-                .body("message", equalTo("Email, password and name are required fields"))
+                .body("message", equalTo(errorMessage))
                 .statusCode(403);
     }
 

@@ -15,7 +15,7 @@ public class LoginUserTest {
     String aToken;
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
+        RestAssured.baseURI = new Url().bUrl;
     }
 
     @Test

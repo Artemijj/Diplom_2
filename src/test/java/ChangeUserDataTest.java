@@ -15,7 +15,7 @@ public class ChangeUserDataTest {
     String aToken;
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
+        RestAssured.baseURI = new Url().bUrl;
         email = "testqaemail@gmail.com";
         password = "testqapassword";
         name = "testqaname";
@@ -75,7 +75,6 @@ public class ChangeUserDataTest {
                 .body("success", equalTo(false))
                 .body("message", equalTo("You should be authorised"))
                 .statusCode(401);
-        email = "testqaemail@gmail.com";
     }
 
     @Test

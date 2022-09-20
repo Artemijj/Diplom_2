@@ -22,7 +22,7 @@ public class CreateOrderTest {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
+        RestAssured.baseURI = new Url().bUrl;
     }
 
     @Test
@@ -57,15 +57,7 @@ public class CreateOrderTest {
         aToken = userActivities.create(email, password, name)
                 .extract()
                 .path("accessToken");
-        String json = "{\"ingredients\": []}";
-        ValidatableResponse responseOrderCreate =
-                given()
-                        .header("Content-type", "application/json")
-                        .auth().oauth2(aToken.substring(7))
-                        .body(json)
-                        .when()
-                        .post("/api/orders")
-                        .then()
+        orderActivities.orderWithoutIngredientsCreate(aToken.substring(7))
                         .assertThat()
                         .body("message", equalTo("Ingredient ids must be provided"))
                         .statusCode(400);

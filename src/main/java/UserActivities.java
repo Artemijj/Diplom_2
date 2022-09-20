@@ -22,7 +22,9 @@ public class UserActivities {
 
     @Step
     public ValidatableResponse login(String email, String password) {
-        String json = "{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}";
+        Gson gson = new Gson();
+        Login login = new Login(email, password);
+        String json = gson.toJson(login);
         ValidatableResponse responseLogin =
                 given()
                         .header("Content-type", "application/json")
